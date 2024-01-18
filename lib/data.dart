@@ -31,28 +31,9 @@ class DataScreenState extends State<DataScreen> {
 
     setState(() {
       csvData = rowsAsListOfValues;
-      print(csvData);
       isLoading = false;
     });
   }
-
-  Future<void> exportToExcel() async {
-    final Excel excel = Excel.createExcel();
-    final Sheet sheet = excel['Sheet1'];
-
-    // Write CSV data to Excel sheet
-    for (int i = 0; i < csvData.length; i++) {
-      for (int j = 0; j < csvData[i].length; j++) {
-        sheet.cell(CellIndex.indexByColumnRow(columnIndex: j, rowIndex: i + 1))
-          ..value = csvData[i][j];
-      }
-    }
-
-    // Save the Excel file
-    // File('your_path/excel.xlsx').writeAsBytes(bytes);  // Uncomment to save the file (change 'your_path')
-  }
-
- // ...
 
 @override
 Widget build(BuildContext context) {
@@ -65,15 +46,13 @@ Widget build(BuildContext context) {
         IconButton(
           icon: const Icon(Icons.file_download),
           onPressed: () {
-            exportToExcel(); // Call exportToExcel when the button is pressed
+           // Call exportToExcel when the button is pressed
           },
         ),
       ],
     ),
     body: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child:  SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.horizontal,
         child: Table(
           columnWidths: {
             0: FixedColumnWidth(screenWidth*0.1),
@@ -112,8 +91,7 @@ Widget build(BuildContext context) {
             }).toList());
           }).toList(),
         ),
-    ),)
-  );
+    ));
 }
 
 }

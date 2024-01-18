@@ -20,7 +20,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         title: Text('CSV Reader'),
         // Add a hamburger icon to open the drawer
         leading: Builder(
