@@ -56,6 +56,8 @@ class DataScreenState extends State<DataScreen> {
 
 @override
 Widget build(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
   return (isLoading) ?  Scaffold(body: Center(child: CircularProgressIndicator(color: Colors.black,))) :  Scaffold(
     appBar: AppBar(
       title: const Text('CSV Reader'),
@@ -71,7 +73,29 @@ Widget build(BuildContext context) {
     body: SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child:  SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         child: Table(
+          columnWidths: {
+            0: FixedColumnWidth(screenWidth*0.1),
+            1: FixedColumnWidth(screenWidth*0.1),
+            2: FixedColumnWidth(screenWidth*0.1),
+            3: FixedColumnWidth(screenWidth*0.1),
+            4: FixedColumnWidth(screenWidth*0.1),
+            5: FixedColumnWidth(screenWidth*0.1),
+            6: FixedColumnWidth(screenWidth*0.1),
+            7: FixedColumnWidth(screenWidth*0.1),
+            8: FixedColumnWidth(screenWidth*0.1),
+            9: FixedColumnWidth(screenWidth*0.1),
+            10: FixedColumnWidth(screenWidth*0.1),
+            11: FixedColumnWidth(screenWidth*0.1),
+            12: FixedColumnWidth(screenWidth*0.1),
+            13: FixedColumnWidth(screenWidth*0.1),
+            14: FixedColumnWidth(screenWidth*0.1),
+            15: FixedColumnWidth(screenWidth*0.1),
+            16: FixedColumnWidth(screenWidth*0.1),
+            17: FixedColumnWidth(screenWidth*0.1),
+            18: FixedColumnWidth(screenWidth*0.1)
+          },
           border: TableBorder.all(width: 1.0),
           children: csvData.map((item) {
             return TableRow(
