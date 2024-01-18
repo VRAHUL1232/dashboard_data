@@ -17,7 +17,6 @@ bool isLoading = false;
 
 class DataScreenState extends State<DataScreen> {
   List<List<dynamic>> csvData = [[]];
-  List<dynamic> csvColumn = [];
 
   @override
   void initState() {
@@ -32,9 +31,7 @@ class DataScreenState extends State<DataScreen> {
 
     setState(() {
       csvData = rowsAsListOfValues;
-      csvColumn = csvData[0];
       print(csvData);
-      print(csvColumn);
       isLoading = false;
     });
   }
@@ -73,29 +70,25 @@ Widget build(BuildContext context) {
     ),
     body: SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-  columns: List.generate(
-          csvColumn.length,
-          (index) => DataColumn(label: Text('Column $index')),
-        )
-, // Check if csvData is not empty before generating columns
-  rows: List.generate(
-          csvData.length,
-          (index) => DataRow(
-            cells: List.generate(
-              csvData[index].length,
-              (cellIndex) => DataCell(
-                Text(csvData[index][cellIndex].toString()),
-              ),
-            ),
-          ),
-        ), // Check if csvData is not empty before generating rows
-),
-
-      ),
-    ),
+      child:  SingleChildScrollView(
+        child: Table(
+          border: TableBorder.all(width: 1.0),
+          children: csvData.map((item) {
+            return TableRow(
+                children: item.map((row) {
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    row.toString(),
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                ),
+              );
+            }).toList());
+          }).toList(),
+        ),
+    ),)
   );
 }
 
